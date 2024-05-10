@@ -5,8 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFCRUD"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Click="Button_ClickOpenAddWindow" Content="Add"></Button>
-    </Grid>
+        Title="MainWindow" Height="450" Width="800"
+        AllowsTransparency="True" 
+        WindowStyle="None"
+        Background="Transparent"
+        Foreground="DarkGreen"
+        MouseDown="Window_MouseDown"
+        >
+    <Border Background="Aquamarine"  CornerRadius="200,0,200,0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Munkatárak nyilvántartás" FontSize="30" TextAlignment="Center" Grid.ColumnSpan="3" Padding="70,20,0,20"/>
+
+            <TextBlock Text="X" FontSize="30" HorizontalAlignment="Right" TextAlignment="Center" Grid.ColumnSpan="3" Padding="10,0"
+         PreviewMouseDown="TextBlock_PreviewMouseDown"
+         />
+            <ListBox x:Name="lstboxPerson" Background="Transparent"
+                     FontSize="20" Foreground="Green" Margin="40,0,0,0"
+                     ItemsSource="{Binding}"
+                     Grid.Row="1"
+                     IsSynchronizedWithCurrentItem="True"
+                     DisplayMemberPath="Name"/>
+            
+            <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Text="Name" FontSize="24" Margin="20"/>
+                <TextBlock Text="Age" FontSize="24" Margin="20"/>
+            </StackPanel>
+
+            <StackPanel x:Name="spInput" Grid.Row="1" Grid.Column="2"  VerticalAlignment="Center" Margin="0,0,20,0">
+                <TextBox Background="LightGreen" Text="{Binding Name}" FontSize="24" Padding="0,10"  Margin="10"/>
+                <TextBox Background="LightGreen" Text="{Binding Age}" FontSize="24" Padding="0,10" Margin="10"/>
+            </StackPanel>
+
+
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Button Click="ButtonAdd_Click"  Background="LightGreen" Content="Add"  FontSize="24" Padding="0,10"  Width="150"
+                     Margin="20"/> 
+                
+                <Button Click="btnSave_Click" Background="LightGreen" Content="Save"  FontSize="24" Padding="0,10"  Width="150"
+                     Margin="20"/>
+                <Button x:Name="btnDelete" Click="btnDelete_Click" Background="LightGreen" Content="Delete"  FontSize="24" Padding="0,10"  Width="150"
+                     Margin="20" />
+
+            </StackPanel>
+            <!--<Button  Click="btnClose_Click_1"  Background="LightGreen" Content="View"  FontSize="24" Padding="0,10"  Width="150"
+      Margin="20" />-->
+        </Grid>
+    </Border>
+    <!--<Button Click="Button_ClickOpenAddWindow" Content="Add"></Button>-->
+   
 </Window>

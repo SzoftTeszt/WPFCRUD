@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,18 @@ namespace WPFCRUD
     /// </summary>
     public partial class WindowAdd : Window
     {
+        Person Person;
+        PersonContext db;
+
         public WindowAdd()
         {
             InitializeComponent();
+
+            Person = new Person("", 18);
+            spInput.DataContext = Person;
+
+            db = new PersonContext();
+
         }
 
         private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -37,6 +47,19 @@ namespace WPFCRUD
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            //Person.Name = "Dezső";
+            //spInput.DataContext = null;
+            //spInput.DataContext = Person;
+            //MessageBox.Show(Person.ToString());
+            Person.Id = 0;
+            db.Persons.Add(Person);
+            await db.SaveChangesAsync();
+            Person.Name = "";
+            Person.Age = 18;
         }
     }
 }
